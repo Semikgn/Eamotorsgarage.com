@@ -528,14 +528,208 @@ ul {
     transform: rotate(90deg);
 }
 
+
 /* =========================================
-   RESPONSIVE AYARI (ÖNEMLİ)
+   RESPONSIVE / MOBİL UYUMLULUK AYARLARI
    ========================================= */
+
+/* Tablet ve Altı (max-width: 991px) */
+@media (max-width: 991px) {
+    .container {
+        padding: 0 30px; /* Kenar boşluklarını mobilde biraz açalım */
+    }
+
+    /* Yazı boyutlarını biraz kısalım */
+    html {
+        font-size: 15px; 
+    }
+
+    /* About kısmı yan yana değil alt alta olsun */
+    .about-grid {
+        grid-template-columns: 1fr; /* Tek kolon */
+        text-align: center; /* Yazıları ortala */
+        gap: 30px;
+    }
+
+    .about-content h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Divider çizgisini ortala */
+    .divider {
+        margin: 0 auto 20px auto;
+    }
+}
+
+/* Mobil Telefonlar (max-width: 768px) */
 @media (max-width: 768px) {
-    /* Mobilde menü sağa yapışık olsun */
+    
+    /* --- HEADER & LOGO --- */
+    .header {
+        height: 70px; /* Header biraz daha incelsin */
+    }
+
+    .logo {
+        left: 15px; /* Soldan boşluk */
+    }
+
+    .logo img {
+        height: 90px; /* Logo mobilde çok daha küçük olmalı */
+        /* Mobilde de hafif sarksın ama abartı durmasın */
+        filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+    }
+
+    /* "Aracını Sat" butonu mobilde çok yer kaplar, gizleyelim */
+    .btn-sell {
+        display: none;
+    }
+
+    /* Hamburger menü en sağa yaslansın */
+    .menu-toggle {
+        margin-left: auto;
+        font-size: 1.5rem;
+    }
+
+    /* --- HERO VIDEO --- */
+    .hero {
+        height: 500px; /* Videoyu mobilde biraz daha kısa tutalım */
+    }
+    
+    /* --- QUICK ACTIONS (GRID) --- */
+    .action-grid {
+        /* Mobilde ikonlar 4 tane alt alta çok uzun olur, 2x2 yapalım */
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px;
+    }
+
+    .action-item {
+        padding: 5px;
+    }
+
+    .icon-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 1.3rem;
+    }
+    
+    .action-item span {
+        font-size: 0.9rem;
+    }
+
+    /* --- HARİTA --- */
+    .map-container iframe {
+        height: 300px; /* Mobilde harita boyunu kısaltalım, scroll'u yemesin */
+    }
+
+    /* --- MOBİL MENÜ KUTUSU --- */
+    .mobile-nav {
+        width: 85%; /* Ekranın %85'ini kaplasın */
+        right: -100%; /* Gizli */
+        border-radius: 0 0 0 20px; /* Sadece sol alt köşe yuvarlak */
+        top: 70px; /* Yeni header yüksekliği kadar aşağı */
+    }
+
     .mobile-nav.active {
-        right: 0;
-        border-radius: 0 0 0 15px; /* Mobilde sadece sol alt köşe yuvarlak kalsın */
-        width: 250px; /* Mobilde biraz daha dar olabilir */
+        right: 0; /* Tam sağa yapışsın */
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .social-links {
+        gap: 20px;
+    }
+}
+
+/* Çok Küçük Ekranlar (iPhone SE vb. - max-width: 400px) */
+@media (max-width: 400px) {
+    .logo img {
+        height: 80px; /* Logoyu biraz daha küçült */
+    }
+    
+    .action-item span {
+        font-size: 0.8rem; /* Yazılar taşmasın */
+    }
+    
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* =========================================
+   HERO CAPTION (VİDEO ÜZERİNDEKİ YAZI)
+   ========================================= */
+   .hero-caption {
+    position: absolute;
+    top: 50%; /* Dikeyde ortala */
+    left: 8%; /* Soldan %8 içeride (Senin çizdiğin yer) */
+    transform: translateY(-50%); /* Tam ortalamak için */
+    z-index: 10; /* Videonun üstünde dursun */
+    
+    /* Şeffafımsı (Glassmorphism) Efekt */
+    background: rgba(0, 0, 0, 0.4); /* %40 Siyah */
+    backdrop-filter: blur(5px); /* Arkadaki videoyu hafif bulanıklaştırır */
+    padding: 30px 40px;
+    border-radius: 0 15px 15px 0; /* Sağ köşeleri yuvarla */
+    border-left: 5px solid var(--primary-color); /* Soluna kırmızı çizgi çek */
+    
+    max-width: 600px; /* Çok uzamasın */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: fadeInLeft 1s ease-out; /* Soldan kayarak gelme animasyonu */
+}
+
+.hero-caption h1 {
+    font-size: 3.5rem; /* Kocaman Başlık */
+    line-height: 1.1;
+    color: #fff;
+    font-weight: 800;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* "YOLA YANSIT" kısmını kırmızı yapalım */
+.hero-caption .highlight {
+    color: var(--primary-color);
+    /* Hafif bir parlama efekti */
+    text-shadow: 0 0 20px rgba(211, 47, 47, 0.6); 
+}
+
+.hero-caption p {
+    font-size: 1.2rem;
+    color: #ddd;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Soldan geliş animasyonu */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translate(-50px, -50%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0, -50%);
+    }
+}
+
+/* --- MOBİL UYUM (Responsive) --- */
+@media (max-width: 768px) {
+    .hero-caption {
+        left: 5%;
+        padding: 15px 20px;
+        max-width: 90%;
+        background: rgba(0, 0, 0, 0.6); /* Mobilde okunabilirlik için biraz daha koyu */
+    }
+
+    .hero-caption h1 {
+        font-size: 1.8rem; /* Mobilde fontu küçült */
+    }
+
+    .hero-caption p {
+        font-size: 0.9rem;
     }
 }
