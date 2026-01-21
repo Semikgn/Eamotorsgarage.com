@@ -1,0 +1,541 @@
+/* Global Styles */
+:root {
+    --primary-color: #D32F2F;
+    /* Red */
+    --secondary-color: #000000;
+    /* Black */
+    --accent-color: #D32F2F;
+    /* Red */
+    --text-color: #EEEEEE;
+    /* Light Gray for text */
+    --bg-light: #111111;
+    /* Dark Gray */
+    --font-main: 'Outfit', sans-serif;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--secondary-color);
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-speed);
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px; /* Header'ın kendi yüksekliği */
+    background-color: rgba(0, 0, 0, 0.9); /* Koyu yarı saydam zemin */
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    /* ÖNEMLİ: Logo 200px olduğu için kutudan taşacak, bunu gizleme diyoruz */
+    overflow: visible; 
+    border-bottom: 1px solid #333;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 100%;
+    
+    /* Flexbox Düzeni */
+    display: flex;
+    align-items: center; /* Dikeyde ortala */
+    position: relative; /* Logo konumlandırması için referans */
+}
+
+/* 1. LOGO (EN SOLDA & KOCAMAN) */
+.logo {
+    /* Logoyu akıştan çıkarıp manuel yerleştiriyoruz */
+    position: absolute;
+    /*top: 0; /* Header'ın en tepesinden başlasın */
+    left: 20px; /* Soldan hizala (container padding ile uyumlu) */
+    z-index: 1001; /* Her şeyin üstünde */
+}
+
+.logo img {
+    height: 200px; /* İSTEDİĞİN DEV BOYUT */
+    width: auto;
+    
+    /* Aşağıya doğru sarkması ve gölgelendirme */
+    filter: drop-shadow(0 10px 10px rgba(0,0,0,0.6));
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05); /* Üzerine gelince hafif büyüsün */
+}
+
+/* 2. BUTON (SAĞA YASLI GRUP) */
+.btn-sell {
+    /* margin-left: auto diyerek kendisini ve sağındaki hamburgeri en sağa iter */
+    margin-left: auto; 
+    margin-right: 20px; /* Hamburger ile arasındaki boşluk */
+    
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* Yazı asla alt satıra inmesin */
+    transition: background-color 0.3s;
+}
+
+.btn-sell:hover {
+    background-color: #b71c1c; /* Hover rengi */
+}
+
+/* 3. HAMBURGER MENÜ (EN SAĞDA) */
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 1.8rem; /* İkon boyutu */
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+}
+
+.menu-toggle:hover {
+    color: var(--primary-color);
+}
+
+/* =========================================
+   MOBİL AYARLARI (Responsive)
+   ========================================= */
+@media (max-width: 768px) {
+    /* Mobilde 200px logo ekranı kapatır, küçültelim */
+    .logo img {
+        height: 100px; 
+    }
+    
+    /* Mobilde 'Hemen Sat' butonu genelde yer kaplamasın diye gizlenir 
+       veya sadece ikon yapılabilir. Şimdilik gizliyoruz: */
+    .btn-sell {
+        display: none; 
+    }
+    
+    /* Buton gidince hamburgerin sağa yaslanması için */
+    .menu-toggle {
+        margin-left: auto; 
+    }
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    width: 100%;
+
+    /* ▼▼▼ İŞTE BURAYI DEĞİŞTİRİYORUZ ▼▼▼ */
+    /* Seçenek 1 (Kırmızı alana yakın, daha kısa banner) */
+    height: 740px;
+    /* Seçenek 2 (Biraz daha yüksek, daha modern banner) */
+    /* height: 400px; */
+    /* ▲▲▲ İstediğin değeri seç ve yorum satırından çıkar ▲▲▲ */
+
+    overflow: hidden; /* Taşan kısımları gizler */
+    background-color: #000;
+    margin-top: 0;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Header'ın (z-index: 1000) altında kalması için */
+}
+
+#heroVideo {
+    width: 100%;
+    height: 100%;
+    /* Bu satır ÇOK ÖNEMLİ: Videoyu esnetmeden, kutuya sığdırır ve kırpar */
+    object-fit: cover;
+    /* Videoyu dikeyde ortalamak için (Opsiyonel) */
+    object-position: center;
+    display: block;
+}
+
+/* Videonun üzerine hafif siyah bir perde çekmek istersen (Yazıların okunması için) */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+    pointer-events: none; /* Tıklamaları engellemez */
+    z-index: 2;
+}
+
+/* Mobilde video çok uzun kalırsa diye müdahale (Opsiyonel) */
+@media (max-width: 768px) {
+    .hero {
+        min-height: auto; /* Mobilde zorunlu yükseklik olmasın */
+    }
+    #heroVideo {
+        height: 100vh; /* Mobilde tam ekran hissi verebiliriz */
+        object-fit: cover;
+    }
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Removed img tag styles since we use background property */
+
+.slider-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+/* Quick Actions */
+.quick-actions {
+    background-color: #000000;
+    /* Distinctly Black */
+    padding: 30px 0;
+    border-top: 2px solid var(--primary-color);
+    /* Separator */
+    border-bottom: 1px solid #333;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-items: center;
+}
+
+.action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+}
+
+.action-item:hover {
+    opacity: 0.8;
+    color: var(--primary-color);
+}
+
+.icon-circle {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    border: 2px solid var(--primary-color);
+    /* Red Border */
+    color: var(--primary-color);
+    /* Red Icon */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-speed);
+}
+
+.action-item:hover .icon-circle {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.action-item span {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+/* About Section */
+.about-section {
+    padding: 80px 0;
+    background-color: var(--bg-light);
+    /* Dark Gray */
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+}
+
+.about-content h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.divider {
+    width: 60px;
+    height: 4px;
+    background-color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.about-content p {
+    color: #ccc;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.btn-read-more {
+    display: inline-block;
+    color: var(--primary-color);
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 2px;
+}
+
+/* Contact / Map */
+.contact-section {
+    background-color: #000;
+}
+
+.section-header {
+    text-align: center;
+    padding: 15px 0;
+    background-color: var(--primary-color);
+    /* Red Strip */
+    color: white;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+}
+
+.map-container iframe {
+    display: block;
+    width: 100%;
+    height: 450px;
+    filter: invert(90%) hue-rotate(180deg);
+    /* Dark mode map effect */
+}
+
+/* Footer */
+.footer {
+    background-color: #0b0b0b;
+    color: #999;
+    padding: 50px 0 30px;
+    text-align: center;
+    border-top: 1px solid #333;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* 1. ADRES ALANI (YENİ) */
+.footer-address {
+    margin-bottom: 10px;
+    text-align: center;
+    max-width: 800px;
+}
+
+.footer-address p {
+    color: #ddd; /* Metin biraz daha parlak olsun */
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.footer-address i {
+    color: var(--primary-color); /* Konum ikonu kırmızı */
+    margin-right: 8px;
+}
+
+/* 2. LOGO */
+.footer-logo img {
+    height: 70px; /* Alt logo boyutu */
+    opacity: 0.9;
+    transition: opacity 0.3s;
+}
+
+.footer-logo img:hover {
+    opacity: 1;
+}
+
+/* 3. TELİF BİLGİSİ */
+.footer-info p {
+    font-size: 0.9rem;
+    color: #666; /* Daha sönük gri */
+    margin-bottom: 5px;
+}
+
+/* 4. SOSYAL MEDYA İKONLARI */
+.social-links {
+    display: flex;
+    gap: 30px; /* İkonların arasını açtık */
+    margin-top: 15px;
+}
+
+.social-btn {
+    color: #fff;
+    font-size: 1.8rem; /* İkonlar daha büyük ve dokunulabilir */
+    transition: all 0.3s ease;
+    display: flex; /* İkonu dikey ortalamak için */
+    align-items: center;
+    justify-content: center;
+}
+
+.social-btn:hover {
+    transform: translateY(-5px); /* Üzerine gelince yukarı zıplasın */
+}
+
+/* Özel Marka Renkleri (Hover Durumu) */
+.social-btn.instagram:hover {
+    color: #E1306C; /* Instagram Rengi */
+    text-shadow: 0 0 15px rgba(225, 48, 108, 0.4); /* Hafif parlama */
+}
+
+.social-btn.whatsapp:hover {
+    color: #25D366; /* WhatsApp Rengi */
+    text-shadow: 0 0 15px rgba(37, 211, 102, 0.4); /* Hafif parlama */
+}
+
+/* =========================================
+   MOBİL MENÜ (YENİ TASARIM - POPUP KUTU)
+   ========================================= */
+   .mobile-nav {
+    position: fixed;
+    top: 90px; /* Header'ın hemen altından başla */
+    right: -300px; /* Başlangıçta ekranın sağında gizli (kutu genişliği kadar) */
+    width: 280px; /* Kutunun sabit genişliği */
+    height: auto; /* İçerik kadar yükseklik */
+    background-color: rgba(20, 20, 20, 0.98); /* Koyu zemin */
+    
+    /* Flexbox ile linkleri alt alta diz */
+    display: flex;
+    flex-direction: column;
+    
+    /* Tasarım Detayları */
+    border: 1px solid var(--primary-color); /* İnce kırmızı dış çerçeve */
+    border-radius: 0 0 15px 15px; /* Sadece alt köşeleri yuvarlat */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5); /* Derinlik gölgesi */
+    
+    transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hafif yaylanma efekti */
+    z-index: 999;
+    overflow: hidden; /* Köşe yuvarlamaların taşmaması için */
+    padding: 10px 0; /* İçeriden üst/alt boşluk */
+}
+
+/* Menü Aktif Olduğunda */
+.mobile-nav.active {
+    right: 20px; /* Sağdan 20px içeride dursun (konteyner hizası) */
+}
+
+/* Menü Linkleri */
+.nav-link {
+    font-size: 1.1rem; /* Font boyutu küçüldü */
+    color: #fff;
+    font-weight: 600;
+    text-align: center; /* Yazıları ortala */
+    padding: 15px 20px; /* Tıklama alanı */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    
+    /* Linkler arasına ince çizgi */
+    border-bottom: 1px solid #333;
+}
+
+/* Son linkin altındaki çizgiyi kaldır */
+.nav-link:last-child {
+    border-bottom: none;
+}
+
+/* Hover Efekti */
+.nav-link:hover {
+    color: var(--primary-color);
+    background-color: rgba(211, 47, 47, 0.1); /* Hafif kırmızı arka plan */
+}
+
+/* Hamburger ikonuna tıklandığında dönme efekti */
+.menu-toggle i {
+    transition: transform 0.3s;
+}
+
+.menu-toggle.active i {
+    transform: rotate(90deg);
+}
+
+/* =========================================
+   RESPONSIVE AYARI (ÖNEMLİ)
+   ========================================= */
+@media (max-width: 768px) {
+    /* Mobilde menü sağa yapışık olsun */
+    .mobile-nav.active {
+        right: 0;
+        border-radius: 0 0 0 15px; /* Mobilde sadece sol alt köşe yuvarlak kalsın */
+        width: 250px; /* Mobilde biraz daha dar olabilir */
+    }
+}
