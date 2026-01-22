@@ -6,11 +6,11 @@
   <h1>🏎️ EA Motors | Performance & Tuning Garage</h1>
   
   <p>
-    <b>Otomotiv sektörü için geliştirilmiş; modern, yüksek performanslı ve kullanıcı deneyimi (UX) odaklı kurumsal web sitesi arayüzü.</b>
+    <b>Bir oto tamir firması olan EA MOTORS için düzenlenmiş bir websitesidir.</b>
   </p>
 
   <p>
-    <a href="https://eamotors-xyz.vercel.app">
+    <a href="https://eamotorsgarage.com">
       <img src="https://img.shields.io/badge/Live_Demo-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo">
     </a>
   </p>
